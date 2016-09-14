@@ -1,0 +1,8 @@
+.DS_Store
+/jspm_packages/
+/node_modules/
+/.idea/
+/npm-debug.log
+/esdoc/
+/index.dist.js
+/index.dist.js.map

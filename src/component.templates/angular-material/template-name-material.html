@@ -1,0 +1,27 @@
+<div layout="row">
+
+  <md-list
+      flex="100"
+      ng-if="ctrl.viewData.length">
+
+    <md-list-item class="md-2-line" ng-repeat="item in ctrl.viewData">
+      <md-checkbox ng-model="item.isActive"></md-checkbox>
+      <div class="md-list-item-text">
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+      </div>
+    </md-list-item>
+
+    <md-button class="md-raised md-primary"
+               ng-click="ctrl.removeData()">
+      Remove an item
+    </md-button>
+  </md-list>
+
+  <md-progress-linear
+      flex="20" flex-offset="5"
+      ng-if="!ctrl.viewData.length"
+      md-mode="indeterminate">
+  </md-progress-linear>
+
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body ng-cloak>
+
+<div msw-core></div>
+
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+
+<script>
+  System.import('angular').then(function () {
+    //var deps = System.import('./dist/core.dist');
+    var deps = System.import('./index');
+
+    deps.then(function (reference) {
+      angular.module('examlpe', [
+        reference.default.name
+      ]).config([
+        //TODO: ui-view ...
+      ]);
+
+      angular.bootstrap(document.body, [
+        reference.default.name
+      ]);
+    });
+  });
+</script>
+</body>
+</html>
