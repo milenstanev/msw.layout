@@ -24,6 +24,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.7",
     "css": "github:systemjs/plugin-css@0.1.27",
+    "distros/bootstrap-less": "github:distros/bootstrap-less@3.3.9",
     "mgcrea/angular-strap": "github:mgcrea/angular-strap@2.3.9",
     "text": "github:systemjs/plugin-text@0.0.9",
     "twbs/bootstrap": "github:twbs/bootstrap@3.3.7",
@@ -38,6 +39,9 @@ System.config({
       "angular-animate": "github:angular/bower-angular-animate@1.5.8",
       "angular-aria": "github:angular/bower-angular-aria@1.5.8",
       "css": "github:systemjs/plugin-css@0.1.27"
+    },
+    "github:distros/bootstrap-less@3.3.9": {
+      "jquery": "github:components/jquery@3.1.0"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"

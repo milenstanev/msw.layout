@@ -1,17 +1,15 @@
 import angular from 'angular';
-import 'mgcrea/angular-strap';
-import 'angular/bower-angular-animate';
-import 'twbs/bootstrap/css/bootstrap.css!';
+import 'angular-material';
 
 import {
   componentConfig
-} from '../../component.config/component.config.js';
-import componentHtml from './template-name-bootstrap.html!text';
-import componentCss from './template-name-bootstrap.css!';
+} from '../../layout.config/layout.config.js';
+
+import componentHtml from './template-name-material.html!text';
+import componentCss from './template-name-material.css!';
 
 const componentTemplate = angular.module(`${componentConfig.COMPONENT_TEMPLATE_COMPONENT}`, [
-  'ngAnimate',
-  'mgcrea.ngStrap'
+  'ngMaterial'
 ]);
 
 //TODO: some kind of expected view data model
@@ -24,4 +22,3 @@ componentTemplate.run([
 ]);
 
 export default componentTemplate;
-

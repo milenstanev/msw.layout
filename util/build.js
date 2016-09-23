@@ -33,6 +33,9 @@ builder.config({
     },
     'css': {
       build: false
+    },
+    'distros/bootstrap-less': {
+      build: false
     }
   }
 });

@@ -1,1 +1,1 @@
-export default from './src/component.js'
+export default from './src/layout.js'

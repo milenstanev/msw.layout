@@ -11,12 +11,12 @@ export const NAMESPACE = 'msw';
  * @desc Component name
  * @type {string}
  */
-export const COMPONENT_NAME = `core`;
+export const COMPONENT_NAME = `layout`;
 /**
  * @desc Component name caps
  * @type {string}
  */
-export const COMPONENT_NAME_CAPS = 'Core';
+export const COMPONENT_NAME_CAPS = 'Layout';
 /**
  * @desc
  * @type {string}

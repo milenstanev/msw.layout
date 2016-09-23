@@ -2,13 +2,12 @@ import angular from 'angular';
 import 'angular-ui/ui-router';
 
 import {
-  componentRoutes, // routes
   componentConfig  // configure names .etc
-} from './component.config/component.config.js';
-import ComponentSvc from './component.Svc.js';
-import ComponentCtrl from './component.Ctrl.js';
-import ComponentDirective from './component.Directive.js';
-import componentTemplate from './component.templates/component.template.js';
+} from './layout.config/layout.config.js';
+import ComponentSvc from './layout.Svc.js';
+import ComponentCtrl from './layout.Ctrl.js';
+import ComponentDirective from './layout.Directive.js';
+import componentTemplate from './layout.templates/layout.template.js';
 
 /**
  * @desc Angular module name: prefix.component, description: desc
@@ -40,8 +39,6 @@ const component = angular.module(`${componentConfig.NAMESPACE}.${componentConfig
  * @type {string}
  */
 component.constant(componentConfig.COMPONENT_CONFIG_NAME, componentConfig);
-
-component.config(componentRoutes);
 
 component.controller(componentConfig.CONTROLLER_NAME, ComponentCtrl);
 

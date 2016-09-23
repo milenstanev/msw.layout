@@ -4,8 +4,8 @@
  * The are should be only those dependencies: 'config', 'component' and 'angular-mocks'.
  *  - If they are more, for sure something going wrong!
  */
-import * as config from './component.config/componentConfig.js';
-import { default as component } from './component.js';
+import * as config from './layout.config/componentConfig.js';
+import { default as component } from './layout.js';
 import 'angular-mocks';
 
 describe(`${config.COMPONENT_NAME} Controller:`, function () {
