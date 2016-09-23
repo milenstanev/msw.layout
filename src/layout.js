@@ -50,5 +50,80 @@ component.directive(componentConfig.DIRECTIVE_NAME_CAPS, [
   }
 ]);
 
+
+component.directive('mswLayoutContent', [
+  '$timeout', 'layoutSvc',
+  /**
+   * @param $timeout
+   * @param layoutSvc {ComponentSvc}
+   * @returns {{link: (function(*, *, *))}}
+   */
+  ($timeout, layoutSvc) => {
+
+    let directive = {
+      link: (scope, element, attrs) => {
+        layoutSvc.$mswLayoutContent = element[0];
+        layoutSvc.mainLayout.$mswLayoutContent = element[0];
+      }
+    };
+
+    return directive;
+  }
+]);
+
+component.directive('mswTopBar', [
+  '$timeout', 'layoutSvc',
+  /**
+   * @param $timeout
+   * @param layoutSvc {ComponentSvc}
+   * @returns {{link: (function(*, *, *))}}
+   */
+    ($timeout, layoutSvc) => {
+
+    let directive = {
+      link: (scope, element, attrs) => {
+        layoutSvc.mainLayout.$mswTopBar = element[0];
+      }
+    };
+
+    return directive;
+  }
+]);
+
+component.directive('mswBottomBar', [
+  '$timeout', 'layoutSvc',
+  /**
+   * @param $timeout
+   * @param layoutSvc {ComponentSvc}
+   * @returns {{link: (function(*, *, *))}}
+   */
+    ($timeout, layoutSvc) => {
+
+    let directive = {
+      link: (scope, element, attrs) => {
+        layoutSvc.mainLayout.$mswBottomBar = element[0];
+      }
+    };
+
+    return directive;
+  }
+]);
+
+component.directive('mswDashboard', [
+  '$window', 'layoutSvc',
+  ($window, layoutSvc) => {
+
+    let directive = {
+      link: (scope, element, attrs) => {
+        layoutSvc.mainLayout.onChangeHeight(() => {
+          element[0].style.height = $window.innerHeight - element[0].offsetTop - layoutSvc.mainLayout.$mswBottomBar.offsetHeight + 'px';
+        });
+      }
+    };
+
+    return directive;
+  }
+]);
+
 export default component;
 

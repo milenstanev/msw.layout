@@ -20,6 +20,7 @@ class ComponentDirective {
      */
     this.scope = scope;
 
+    this.replace = 'true';
     /**
      * Controller prefix in the template
      * @type {string}
