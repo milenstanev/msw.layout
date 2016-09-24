@@ -29,72 +29,36 @@
        layout="row" md-tab-scroll="false">
 
     <md-sidenav
-        msw-navigation
         md-is-locked-open="$mdMedia('gt-sm')"
-        md-component-id="left"
-        class="md-whiteframe-z2 md-sidenav-left">
+        md-component-id="left">
 
-      <md-button
-          layout-align="center center"
-          ng-repeat="items in ['i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i', 'i','i'] track by $index">
-        <div class="md-tile-content">
-          Actions
-        </div>
-      </md-button>
+      <msw-navigation></msw-navigation>
+      <script type="text/ng-template" id="msw-navigation.tpl.html">
+        <md-content>
+          <md-list flex style="padding: 0">
+            <md-list-item
+                ng-repeat="button in ctrl.navigation track by $index"
+                ng-click="ctrl.callToAction(button)">
+              {{button.text}}
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </script>
+
     </md-sidenav>
 
     <div msw-content layout="column" flex>
-
-      <!--<md-toolbar
-          msw-top-bar
-          layout="row"
-          layout-align="center center">
-
-        <section layout-align="start center" layout-fill flex>
-          <md-button hide-gt-sm ng-click="vm.toggleItemsList()" aria-label="Menu">
-            <i class="material-icons">menu</i>
-          </md-button>
-        </section>
-
-        <section layout-align="end center">
-          <md-button class="toolbar-button" aria-label="Search">
-            <i class="material-icons">search</i>
-          </md-button>
-          <md-button class="toolbar-button" aria-label="Notifications">
-            <i class="material-icons">notifications</i>
-            <span class="notifications-label">7</span>
-          </md-button>
-          <md-button class="toolbar-button" aria-label="Settings" ng-click="vm.toggleRightSidebar()">
-            <i class="material-icons">menu</i>
-          </md-button>
-        </section>
-      </md-toolbar>-->
-
-      <md-content msw-dashboard flex>
-        <div layout="column" style="height: 100%; background: red;">
-          <div flex="50" style="background: darkgray; padding: 10px; margin: 10px">
-            50
-          </div>
-          <div flex="50" style="background: dimgray; padding: 10px; ">
-            50
-          </div>
-        </div>
+      <md-content flex>
+        <msw-dashboard></msw-dashboard>
       </md-content>
-
-      <!--<div layout="column" style="height: 100%; background: red;">
-        <div flex="50" style="background: darkgray;">
-          50
-        </div>
-        <div flex="50" style="background: dimgray;">
-          50
-        </div>
-      </div>-->
-
 
     </div>
 
-    <md-sidenav md-component-id="right"
-                class="md-whiteframe-z2 md-sidenav-right" md-is-locked-open="true">
+    <md-sidenav
+        md-component-id="right"
+        class="md-whiteframe-z2 md-sidenav-right"
+        md-is-locked-open="false">
+
       <md-toolbar>
         <md-toolbar class="md-warn" layout="row" layout-align="center center">
           <img class="img-circle" ng-src="assets/images/feynman.jpg">
@@ -112,28 +76,27 @@
       </md-toolbar>
 
       <section>
-        <md-toolbar md-theme="grey" class="md-hue-1">
+        <md-toolbar md-theme="green" class="md-hue-1">
           <div class="md-toolbar-tools">
             <h3>Messages</h3>
           </div>
         </md-toolbar>
-        <div ng-include src="'app/views/partials/messages.html'"/>
       </section>
+
     </md-sidenav>
   </div>
 
   <md-toolbar
       msw-bottom-bar
       layout="row"
-      layout-align="center center">
+      layout-align="start center">
 
-    <section layout-align="start center" layout-fill flex>
-      <md-button hide-gt-sm ng-click="vm.toggleItemsList()" aria-label="Menu">
-        <i class="material-icons">menu</i>
+    <section flex="90" layout="row" layout-align="start center">
+
+      <md-button class="md-icon-button" aria-label="More">
+        <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
       </md-button>
-    </section>
 
-    <section layout-align="end center">
       <md-button class="toolbar-button" aria-label="Search" md-is-locked-open="$mdMedia('gt-sm')">
         <i class="material-icons">search</i>
       </md-button>
@@ -143,6 +106,29 @@
       </md-button>
       <md-button class="toolbar-button" aria-label="Settings" ng-click="vm.toggleRightSidebar()">
         <i class="material-icons">menu</i>
+      </md-button>
+    </section>
+
+
+    <section
+        flex="10"
+        layout="row"
+        layout-align="end center"
+        ng-controller="DashboardCtrl as ctrl">
+      <md-button
+          class="toolbar-button"
+          aria-label="Add Dashboard"
+          ng-click="ctrl.createDashboard('asd' + ctrl.dashboards.length)">
+        <i class="material-icons">+</i>
+      </md-button>
+
+      <md-button
+          class="toolbar-button"
+          aria-label="Dashboards"
+          ng-repeat="dashboard in ctrl.dashboards"
+          ng-class="{'msw-button-active-dashboard': dashboard.isActive}"
+          ng-click="ctrl.activateDashboard(dashboard.id);">
+        <i class="material-icons">{{dashboard.name}}</i>
       </md-button>
     </section>
 

@@ -1,0 +1,46 @@
+<ui-view></ui-view>
+
+<!--{{ctrl.dashboards}}-->
+
+<div
+    ng-cloak
+    ng-repeat="dashboard in ctrl.dashboards track by $index"
+    ng-if="dashboard.isActive ">
+
+  <md-content
+      layout-padding
+      class="msw-dashboard-grid">
+    <h4 class="msw-title">
+      {{dashboard.name}}
+    </h4>
+
+    <div ng-repeat="component in dashboard.components track by $index">
+      <msw-component
+          directive-name="component.directiveName"
+          ng-if="component.type === 'grid'">
+      </msw-component>
+    </div>
+  </md-content>
+
+  <div
+    class="msw-dashboard-window"
+    ng-repeat="component in dashboard.components track by $index">
+    <msw-component
+        directive-name="component.directiveName"
+        ng-if="dashboard.type === 'window'">
+    </msw-component>
+  </div>
+
+</div>
+
+<style>
+  .msw-dashboard-window {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    z-index: 99999;
+    background: red;
+  }
+</style>
