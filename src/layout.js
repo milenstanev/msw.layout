@@ -7,6 +7,9 @@ import {
 import ComponentSvc from './layout.Svc.js';
 import ComponentCtrl from './layout.Ctrl.js';
 import ComponentDirective from './layout.Directive.js';
+
+import dashboard from './components/dashboard/dashboard.js';
+import navigation from './components/navigation/navigation.js';
 import componentTemplate from './layout.templates/layout.template.js';
 
 /**
@@ -31,6 +34,8 @@ import componentTemplate from './layout.templates/layout.template.js';
  */
 const component = angular.module(`${componentConfig.NAMESPACE}.${componentConfig.COMPONENT_NAME}`, [
   'ui.router'
+  , dashboard.name
+  , navigation.name
   , componentTemplate.name
 ]);
 
@@ -47,81 +52,6 @@ component.service(componentConfig.SERVICE_NAME, ComponentSvc);
 component.directive(componentConfig.DIRECTIVE_NAME_CAPS, [
   () => {
     return new ComponentDirective();
-  }
-]);
-
-
-component.directive('mswLayoutContent', [
-  '$timeout', 'layoutSvc',
-  /**
-   * @param $timeout
-   * @param layoutSvc {ComponentSvc}
-   * @returns {{link: (function(*, *, *))}}
-   */
-  ($timeout, layoutSvc) => {
-
-    let directive = {
-      link: (scope, element, attrs) => {
-        layoutSvc.$mswLayoutContent = element[0];
-        layoutSvc.mainLayout.$mswLayoutContent = element[0];
-      }
-    };
-
-    return directive;
-  }
-]);
-
-component.directive('mswTopBar', [
-  '$timeout', 'layoutSvc',
-  /**
-   * @param $timeout
-   * @param layoutSvc {ComponentSvc}
-   * @returns {{link: (function(*, *, *))}}
-   */
-    ($timeout, layoutSvc) => {
-
-    let directive = {
-      link: (scope, element, attrs) => {
-        layoutSvc.mainLayout.$mswTopBar = element[0];
-      }
-    };
-
-    return directive;
-  }
-]);
-
-component.directive('mswBottomBar', [
-  '$timeout', 'layoutSvc',
-  /**
-   * @param $timeout
-   * @param layoutSvc {ComponentSvc}
-   * @returns {{link: (function(*, *, *))}}
-   */
-    ($timeout, layoutSvc) => {
-
-    let directive = {
-      link: (scope, element, attrs) => {
-        layoutSvc.mainLayout.$mswBottomBar = element[0];
-      }
-    };
-
-    return directive;
-  }
-]);
-
-component.directive('mswDashboard', [
-  '$window', 'layoutSvc',
-  ($window, layoutSvc) => {
-
-    let directive = {
-      link: (scope, element, attrs) => {
-        layoutSvc.mainLayout.onChangeHeight(() => {
-          element[0].style.height = $window.innerHeight - element[0].offsetTop - layoutSvc.mainLayout.$mswBottomBar.offsetHeight + 'px';
-        });
-      }
-    };
-
-    return directive;
   }
 ]);
 
