@@ -21,7 +21,7 @@ dashboard.directive('mswComponent', [
         directiveName: '='
       },
       link: (scope, element) => {
-        element.append(`<div ${scope.directiveName}>btn</div>`);
+        element.append(scope.directiveName);
         $compile(element.contents())(scope);
       }
     }
@@ -38,7 +38,7 @@ dashboard.directive('mswDashboard', [
       template: directiveHtml,
       link: (scope, element, attrs) => {
         LayoutMaterialSvc.onChangeHeight(() => {
-          element[0].style.height = $window.innerHeight - element[0].offsetTop - LayoutMaterialSvc.$mswBottomBar.offsetHeight + 'px';
+          //element[0].style.height = $window.innerHeight - element[0].offsetTop - LayoutMaterialSvc.$mswBottomBar.offsetHeight + 'px';
         });
       }
     };

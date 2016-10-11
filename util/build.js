@@ -1,6 +1,4 @@
-const fs = require('fs');
 const Builder = require('systemjs-builder');
-const gulp = require('gulp');
 
 /**
  * Define baseUrl
@@ -47,7 +45,7 @@ builder
     {
       minify: true,
       sourceMaps: true,
-      format: 'cjs', // cjs // es6 without bundle
+      format: 'amd', // cjs // es6 without bundle
       runtime: false
     }
   ).then(function() {

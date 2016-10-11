@@ -1,8 +1,15 @@
+import angular from 'angular';
+
 /**
  * @desc Component controller constructor
  */
 class ComponentCtrl {
-
+  /**
+   *
+   * @param {ng.$window} $window
+   * @param {ng.$scope} $scope
+   * @param @type{ComponentSvc} layoutSvc
+   */
   constructor ($window, $scope, layoutSvc) {
     this.domEl = undefined;
     this.$window = $window;
@@ -11,6 +18,7 @@ class ComponentCtrl {
 
     this.init();
   }
+
   /**
    *
    */
@@ -34,6 +42,7 @@ class ComponentCtrl {
       this.$window.removeEventListener('resize', callLayoutChange);
     });
   }
+
   /**
    *
    */

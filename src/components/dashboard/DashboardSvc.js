@@ -6,13 +6,16 @@ import {
 
 class DashboardSvc {
   constructor() {
+    this.isEnabled = false;
+
     /**
      * @type {DataProvider}
      */
     this.dashboards = this.dashboards || new DataProvider();
 
     this.createDashboard('Test 1', true);
-    this.addComponent('Test', 'grid', 'md-button');
+    this.addComponent('Test', 'grid', '<md-calendar ng-model="asd"></md-calendar> {{asd | date}}');
+    this.addComponent('Test', 'grid', '<md-button>Text</md-button>');
   }
 
   /**

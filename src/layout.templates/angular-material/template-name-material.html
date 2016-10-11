@@ -1,4 +1,5 @@
 <section layout="column">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <md-toolbar
       msw-top-bar
@@ -11,16 +12,17 @@
       </md-button>
     </section>
 
-    <section layout-align="end center">
+    <section layout-align="center center">
       <md-button class="toolbar-button" aria-label="Search">
-        <i class="material-icons">search</i>
+        <i class="material-icons"></i>
+        Search
       </md-button>
       <md-button class="toolbar-button" aria-label="Notifications">
         <i class="material-icons">notifications</i>
         <span class="notifications-label">7</span>
       </md-button>
       <md-button class="toolbar-button" aria-label="Settings" ng-click="vm.toggleRightSidebar()">
-        <i class="material-icons">menu</i>
+        <i class="material-icons">business</i>
       </md-button>
     </section>
   </md-toolbar>
@@ -29,29 +31,48 @@
        layout="row" md-tab-scroll="false">
 
     <md-sidenav
+        flex="25"
         md-is-locked-open="$mdMedia('gt-sm')"
         md-component-id="left">
 
       <msw-navigation></msw-navigation>
+
       <script type="text/ng-template" id="msw-navigation.tpl.html">
         <md-content>
-          <md-list flex style="padding: 0">
-            <md-list-item
-                ng-repeat="button in ctrl.navigation track by $index"
-                ng-click="ctrl.callToAction(button)">
-              {{button.text}}
-            </md-list-item>
+          <md-list flex style="padding: 0;">
+
+              <md-list-item
+                  flex
+                  style="margin: 0px -8px;"
+                  class="msw-on-hover-placeholder"
+                  ng-click="ctrl.callToAction(button)"
+                  ng-repeat="button in ctrl.navigation track by $index">
+
+                  {{button.text}}
+
+                  <md-button class="md-icon-button md-secondary md-button msw-show-on-hover">
+                    <i class="material-icons">
+                      <!--&#xE5D4;-->
+                      &#xE8B8;
+                    </i>
+                  </md-button>
+
+              </md-list-item>
+
+
           </md-list>
         </md-content>
       </script>
 
     </md-sidenav>
 
-    <div msw-content layout="column" flex>
+    <div
+        flex
+        msw-content
+        layout="column">
       <md-content flex>
         <msw-dashboard></msw-dashboard>
       </md-content>
-
     </div>
 
     <md-sidenav
@@ -91,13 +112,33 @@
       layout="row"
       layout-align="start center">
 
-    <section flex="90" layout="row" layout-align="start center">
-
+    <section flex="60" layout="row" layout-align="start center">
       <md-button class="md-icon-button" aria-label="More">
-        <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        <!--<md-button class="toolbar-button md-fab md-primary" aria-label="More">-->
+        <!--<md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>-->
+        <!--<md-icon>+</md-icon>-->
+
+        <!--<i class="material-icons">menu</i>-->
+        <!--<i class="material-icons">add</i>-->
+        <i class="material-icons">&#xE5D3;</i>
+        <md-tooltip md-direction="top">
+          Title
+        </md-tooltip>
       </md-button>
 
-      <md-button class="toolbar-button" aria-label="Search" md-is-locked-open="$mdMedia('gt-sm')">
+
+      <md-button
+          class="toolbar-button md-fab md-primary"
+          aria-label="Dashboards"
+          ng-repeat="component in [1,2,3]"
+          ng-class="{'msw-button-active-dashboard': dashboard.isActive}"
+          ng-click="">
+        <span>Component {{component}}</span>
+        <md-tooltip md-direction="top">
+          Minimized component name
+        </md-tooltip>
+      </md-button>
+      <!--<md-button class="toolbar-button" aria-label="Search" md-is-locked-open="$mdMedia('gt-sm')">
         <i class="material-icons">search</i>
       </md-button>
       <md-button class="toolbar-button" aria-label="Notifications">
@@ -106,29 +147,35 @@
       </md-button>
       <md-button class="toolbar-button" aria-label="Settings" ng-click="vm.toggleRightSidebar()">
         <i class="material-icons">menu</i>
-      </md-button>
+      </md-button>-->
     </section>
 
-
     <section
-        flex="10"
+        flex="40"
         layout="row"
         layout-align="end center"
         ng-controller="DashboardCtrl as ctrl">
+
       <md-button
-          class="toolbar-button"
+          class="toolbar-button md-fab md-primary"
           aria-label="Add Dashboard"
-          ng-click="ctrl.createDashboard('asd' + ctrl.dashboards.length)">
+          ng-click="ctrl.createDashboard($event);">
         <i class="material-icons">+</i>
+        <md-tooltip md-direction="top">
+          Add new Dashboard
+        </md-tooltip>
       </md-button>
 
       <md-button
-          class="toolbar-button"
+          class="toolbar-button md-fab md-primary"
           aria-label="Dashboards"
           ng-repeat="dashboard in ctrl.dashboards"
           ng-class="{'msw-button-active-dashboard': dashboard.isActive}"
           ng-click="ctrl.activateDashboard(dashboard.id);">
-        <i class="material-icons">{{dashboard.name}}</i>
+        <span>{{dashboard.name}}</span>
+        <md-tooltip md-direction="top">
+          {{dashboard.name}} <br> <i>Click to Activate it.</i>
+        </md-tooltip>
       </md-button>
     </section>
 

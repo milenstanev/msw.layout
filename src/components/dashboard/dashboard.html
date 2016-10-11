@@ -1,5 +1,3 @@
-<ui-view></ui-view>
-
 <!--{{ctrl.dashboards}}-->
 
 <div
@@ -7,25 +5,38 @@
     ng-repeat="dashboard in ctrl.dashboards track by $index"
     ng-if="dashboard.isActive ">
 
-  <md-content
-      layout-padding
-      class="msw-dashboard-grid">
-    <h4 class="msw-title">
+  <section
+      layout="column"
+      md-theme="altTheme"
+      class="msw-dashboard-placeholder">
+    <h4 class="msw-title" layout-padding>
       {{dashboard.name}}
     </h4>
+    <md-content
+        layout-padding
+        flex="{{ctrl.col1}}"
+        class="msw-dashboard-grid msw-overflow-auto">
 
-    <div ng-repeat="component in dashboard.components track by $index">
-      <msw-component
+      <div msw-component
+          ng-repeat="component in dashboard.components track by $index"
           directive-name="component.directiveName"
           ng-if="component.type === 'grid'">
-      </msw-component>
-    </div>
-  </md-content>
+      </div>
 
-  <div
-    class="msw-dashboard-window"
-    ng-repeat="component in dashboard.components track by $index">
+      <div style="height: 2000px;"></div>
+    </md-content>
+
+    <h4 ng-if="ctrl.col2" layout-padding>
+      Label
+    </h4>
+    <div md-theme="altTheme" class="msw-dashboard-view msw-overflow-auto" flex="{{ctrl.col2}}">
+      <ui-view></ui-view>
+    </div>
+  </section>
+
+  <div class="msw-dashboard-window">
     <msw-component
+        ng-repeat="component in dashboard.components track by $index"
         directive-name="component.directiveName"
         ng-if="dashboard.type === 'window'">
     </msw-component>
@@ -34,6 +45,19 @@
 </div>
 
 <style>
+  msw-dashboard, msw-dashboard > div, .msw-dashboard-placeholder {
+    height: 100%;
+  }
+
+  .msw-dashboard-placeholder h4 {
+    padding-top: .25em;
+    padding-bottom: .25em;
+  }
+
+  msw-dashboard ui-view, .msw-overflow-auto {
+    overflow: auto;
+  }
+
   .msw-dashboard-window {
     position: fixed;
     left: 0;
@@ -43,4 +67,20 @@
     z-index: 99999;
     background: red;
   }
+
+  .msw-dashboard-grid, .msw-dashboard-view {
+    border-top: 1px solid lightgray;
+  }
+
+  msw-component, div[msw-component] {
+    padding: 0;
+  }
+
+  .padding-0 {
+    padding: 0 !important;
+  }
+
+  .padding-bottom-0 {
+    padding-bottom: 0;
+  };
 </style>
